@@ -14,6 +14,20 @@ require('laravel-elixir-vue-2');
  */
 
 elixir((mix) => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+  mix.styles([
+    './node_modules/material-design-icons/iconfont/material-icons.css'
+  ],'public/plugins/materialize/css/materialize-icons.css');
+
+    mix.styles([
+      './node_modules/materialize-css/dist/css/materialize.css'
+    ],'public/plugins/materialize/css/materialize.css');
+
+    mix.scripts([
+      './node_modules/materialize-css/dist/js/materialize.js'
+    ],'public/plugins/materialize/js/materialize.js');
+
+    mix.scripts([
+      './node_modules/jquery/dist/jquery.js'
+    ],'public/plugins/jquery/js/jquery.js');
+
 });
