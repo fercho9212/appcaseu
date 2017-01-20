@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.dashboard.index');
+});
+
+Route::group(['prefix'=>'admin'],function(){
+  Route::resource('requirements', 'Admin\RequirementsController');
 });

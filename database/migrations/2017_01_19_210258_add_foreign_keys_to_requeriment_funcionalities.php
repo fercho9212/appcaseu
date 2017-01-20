@@ -14,7 +14,7 @@ class AddForeignKeysToRequerimentFuncionalities extends Migration
     public function up()
     {
         Schema::table('funcionalities', function (Blueprint $table) {
-                $table->foreign('requirement_id')->references('id')->on('funcionalities');
+                $table->foreign('requirement_id')->references('id')->on('requirements');
         });
     }
 
