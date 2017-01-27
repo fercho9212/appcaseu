@@ -16,5 +16,13 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix'=>'admin'],function(){
+  Route::get('requirements/list','Admin\RequirementsController@list');
   Route::resource('requirements', 'Admin\RequirementsController');
+  Route::get('requirement','Admin\RequirementsController@list_requerimient');
+  Route::get('requirement/{id}/assignfun',[
+    'uses'=>'Admin\RequirementsController@assi_funcionality',
+    'as'=>'requirement.assignfun'
+  ]);
+
+ Route::resource('functionalities', 'Admin\FunctionalitiesController');
 });

@@ -15,17 +15,19 @@
    </header>
     <div class="container">
         <div class="col s12 m8 l10">
+          @include('admin.template.components.message')          <!--MENSAGGE SEND FOR LARAVEL-->
+          @include('admin.template.components.message_ajax')     <!--MENSAGGE SEND FOR AJAX-->
+
           @yield('content')
         </div>
-
     </div>
 
 
 
-    @yield('scripts')
+
     {{Html::script('plugins/jquery/js/jquery.js')}}
     {{Html::script('plugins/materialize/js/materialize.js')}}
     {{Html::script('js/scripts-materialize.js')}}
-
+    @yield('scripts')
   </body>
 </html>

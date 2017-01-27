@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Requirement;
-use Laracasts\Flash\Flash;
+use App\Models\Funcionality;
 
-class RequirementsController extends Controller
+class FunctionalitiesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +15,7 @@ class RequirementsController extends Controller
      */
     public function index()
     {
-        $requirements=Requirement::all();
-        return view('admin.requirements.index')->with('requirements',$requirements);
+
     }
 
     /**
@@ -27,7 +25,7 @@ class RequirementsController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -38,16 +36,26 @@ class RequirementsController extends Controller
      */
     public function store(Request $request)
     {
-        //if ($request->ajax()) {
-          //$requirement=new Requirement($request->all());
-          //$requirement->save();
-          //return response()->json(['message'=>'ok','name'=>$request->description]);
-        //}
 
-        $requirement=new Requirement($request->all());
-        $requirement->save();
-        Flash::info('The requirement'.$requirement->name. ' is register');
-        return redirect()->route('requirements.index');
+
+
+       $nfunction=count($request->description);
+
+       for ($i=0; $i <$nfunction ; $i++) {
+          $functionalities=new Funcionality;
+          $functionalities->description=$request->description[$i];
+          $functionalities->requirement_id=$request->requirement_id;
+          $functionalities->save();
+          echo "Entrra";
+       }
+
+       //echo $nfunction;
+      // foreach ($request->all() as $key => $value) {
+    //     echo $key[$value];
+      // }
+       //foreach ($request->description as $key) {
+      //   echo $key;
+       //}
 
     }
 
@@ -70,9 +78,8 @@ class RequirementsController extends Controller
      */
     public function edit($id)
     {
-        dd($id);
+        //
     }
-
 
     /**
      * Update the specified resource in storage.
@@ -96,21 +103,4 @@ class RequirementsController extends Controller
     {
         //
     }
-
-    public function list_requerimient(Request $request){
-      $requirements=Requirement::all();
-      if ($request->ajax()) {
-         return $requirements;
-      }else {
-
-      }
-        //return view('admin.requirements.list')->with('requirements',$requirements);
-    }
-    //Funcíon que asigna una funcionalidad
-    public function assi_funcionality($id){
-      $requirement=Requirement::find($id);
-      return view('admin/requi_func.index')->with('requirement',$requirement);
-    }
-
-
 }
