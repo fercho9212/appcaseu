@@ -62,3 +62,15 @@
         }
         */
   //});
+$(function(){
+
+//var id=$('#ocult').val();
+//$.ajax({
+//  type:'GET',
+//  url:'admin/requirement/'+id+'/assignfun',
+//  success:function(msj){
+//    alert(msj);
+//  }
+//});
+
+})

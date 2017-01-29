@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
+use App\Models\Requirement;
 use App\Models\Funcionality;
+use Illuminate\Support\Facades\DB;
+use Laracasts\Flash\Flash;
 
 class FunctionalitiesController extends Controller
 {
@@ -13,6 +17,18 @@ class FunctionalitiesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function assi_funcionality($id){
+
+      $requirement=Requirement::find($id);
+     $funcionalities=DB::table('funcionalities')->where('requirement_id',$id)->get(['id','description']);
+
+
+     return view('admin/requi_func.index')->with([
+                                                 'requirement'=>$requirement,
+                                                 'funcionalities'=>$funcionalities
+                                                ]);
+     }
+
     public function index()
     {
 
@@ -37,27 +53,40 @@ class FunctionalitiesController extends Controller
     public function store(Request $request)
     {
 
-
-
        $nfunction=count($request->description);
-
-       for ($i=0; $i <$nfunction ; $i++) {
-          $functionalities=new Funcionality;
-          $functionalities->description=$request->description[$i];
-          $functionalities->requirement_id=$request->requirement_id;
-          $functionalities->save();
-          echo "Entrra";
+       if ($nfunction>0) {
+         for ($i=0; $i <$nfunction ; $i++) {
+            $functionalities=new Funcionality;
+        //
+              $functionalities->description=$request->description[$i];
+              $functionalities->requirement_id=$request->requirement_id;
+              $functionalities->save();
+              //$funcionalities=DB::table('funcionalities')->where('requirement_id',$request->requirement_id)->get(['id','description','requirement_id']);
+            //  return $funcionalities->toJson();
+            }
+            $funcionalities=DB::table('funcionalities')->where('requirement_id',$request->requirement_id)->get(['id','description','requirement_id']);
+            return $funcionalities->toJson();
+         }
+         //$funcionalities=DB::table('funcionalities')->where('requirement_id',$request->requirement_id)->get(['id','description','requirement_id']);
+         //return $funcionalities->toJson();
+         //Flash::info('Los requerimientos han sido registrados');
+         //
+  //       return redirect()->route('requirement.assignfun',[$request->requirement_id]);
+  //     }else {
+  //       Flash::danger('Error al registrar');
+  //       return view('admin.requi_func.index',$request->requirement_id);
        }
+
 
        //echo $nfunction;
       // foreach ($request->all() as $key => $value) {
     //     echo $key[$value];
-      // }
+
        //foreach ($request->description as $key) {
       //   echo $key;
        //}
 
-    }
+
 
     /**
      * Display the specified resource.
@@ -103,4 +132,5 @@ class FunctionalitiesController extends Controller
     {
         //
     }
+
 }

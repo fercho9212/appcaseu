@@ -107,10 +107,7 @@ class RequirementsController extends Controller
         //return view('admin.requirements.list')->with('requirements',$requirements);
     }
     //Funcíon que asigna una funcionalidad
-    public function assi_funcionality($id){
-      $requirement=Requirement::find($id);
-      return view('admin/requi_func.index')->with('requirement',$requirement);
-    }
+
 
 
 }
