@@ -162,3 +162,8 @@
     border-color:#dca7a7
 
 }
+/*Modal Delete*/
+.modal_delete {
+    width: 40%;
+    margin-top: 10%;
+}

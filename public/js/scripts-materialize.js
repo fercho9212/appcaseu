@@ -46,32 +46,48 @@ $(function(){
           var button_id = $(this).attr("id");
           $('#row'+button_id+'').remove();
     });
+    var table=$('#tbl_func').dataTable();
 
     $('#frm_func').submit(function(event){
       event.preventDefault();
+      //var table1=$('#tbl_func').dataTable();
       var form=$('#frm_func');
       var data=form.serialize();
       var btn_x=$('.del_func');
       var url='/admin/functionalities'
-      var table=$('#tbl_func');
       var tr=$('#data_f');
       var html='';
+
       $.ajax({
         type:     'POST',
         data:     data,
+        dataType: 'json',
         url:      url,
         success:  function(msj){
-
+        table.fnClearTable();
                 btn_x.remove();
                 form[0].reset();
-                $.each(JSON.parse(msj),function(i,item){
-                  html+='<tr><td>'+item.description+'</td><td>'+item.id+'</td></tr>';
+                $.each(msj,function(i,item){
+                  table.fnAddData([
+                    item.description,
+                    item.id,
+                  ]);
+                  //html+='<tr><td>'+item.description+'</td><td>'+item.id+'</td></tr>';
                   //$('#tbl_func').append('<tr><td>'+item.description+'</td><td>'+item.id+'</td></tr>')
                 })
-                $('#rest_func').html(html);
+              //  $('#tbl_func').html(html);
         }
       });
 
     });
 
-})
+    $('.btn_delete').click(function(){
+      var id=$(this).data('id');
+      $('.bottom-sheet').attr('id','modal'+id);
+
+      $('#modal'+id).modal();
+
+    });
+
+
+});
