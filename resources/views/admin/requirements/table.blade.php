@@ -1,4 +1,5 @@
 <table id="tbl_requerimient" class="display bordered">
+
       <thead>
         <tr>
             <th >No</th>
@@ -18,9 +19,8 @@
           </tr>
         @endforeach
       </tbody>
+
 </table>
 
 <script type="text/javascript">
-
-
 </script>
