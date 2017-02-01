@@ -81,21 +81,48 @@ $(function(){
 
     });
 
-$(document).on('click', '#btn_delete', function(){
-  //var href=$('#btn_delete').attr('data-href');
-  //alert(href);
-  $('#modal1').modal();
+$('#modal1').modal();
+      $(document).on('click', '#btn_delete', function(){
+        var row=$(this).parents('tr');
+        var id=row.data('id');
+        //alert(id);
+        $('.send_id').attr('data-id',id);
+});
+/*
+//change
+$('#modal1').modal();
+$(document).on('click', '#btn_delete', function(e){
+  e.preventDefault();
+
   var row=$(this).parents('tr');
   var id=row.data('id');
+  var form=$('#form_delete');
+  var url=form.attr('action').replace(':REQUI:ID',id);
+  var data=form.serialize();
+
   //alert(id);
-  $('.send_id').attr('data-id',id);
+
 });
 
+ */
  $('#btn_confirm').click(function(e){
-   var no=$('.send_id').attr('data-id');
-alert('this is nu'+no);
+   e.preventDefault();
+   var id=$('.send_id').attr('data-id');
+   var url='/admin/requirement/'+id+'/destroy';
+   $.ajax({
+     type:'GET',
+     url:url,
+     data:id,
+     success:function(data){
+       console.log(data);
+     },
+     error:function(data){
+       console.log('susss');
+     }
+   });
    //$(this).attr()
  });
+
   // $('.btn_delete').click(function(){
 //    var id=$(this).data('id');
 //  $('.bottom-sheet').attr('id','modal'+id);

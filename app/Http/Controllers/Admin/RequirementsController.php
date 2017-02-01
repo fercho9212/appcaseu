@@ -94,7 +94,7 @@ class RequirementsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $id;
     }
 
     public function list_requerimient(Request $request){

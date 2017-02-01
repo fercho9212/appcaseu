@@ -25,4 +25,9 @@ Route::group(['prefix'=>'admin'],function(){
   ]);
 
  Route::resource('functionalities', 'Admin\FunctionalitiesController');
+
+ Route::get('requirement/{id}/destroy',[
+   'uses'=>'Admin\RequirementsController@destroy',
+   'as'=>'requirements.destroy'
+ ]);
 });
