@@ -10,9 +10,9 @@
 @section('content')
   @include('admin.requirements.modal_delete')
   <h3 class="center">Main</h3>
-
-    @include('admin.template.components.preloader')
     @include('admin.requirements.form')
+    @include('admin.template.components.preloader')
+
 
 
       <!--

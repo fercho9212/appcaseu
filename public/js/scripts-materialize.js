@@ -81,13 +81,28 @@ $(function(){
 
     });
 
-    $('.btn_delete').click(function(){
-      var id=$(this).data('id');
-      $('.bottom-sheet').attr('id','modal'+id);
+$(document).on('click', '#btn_delete', function(){
+  //var href=$('#btn_delete').attr('data-href');
+  //alert(href);
+  $('#modal1').modal();
+  var row=$(this).parents('tr');
+  var id=row.data('id');
+  //alert(id);
+  $('.send_id').attr('data-id',id);
+});
 
-      $('#modal'+id).modal();
+ $('#btn_confirm').click(function(e){
+   var no=$('.send_id').attr('data-id');
+alert('this is nu'+no);
+   //$(this).attr()
+ });
+  // $('.btn_delete').click(function(){
+//    var id=$(this).data('id');
+//  $('.bottom-sheet').attr('id','modal'+id);
+//$('#modal').modal();
 
-    });
+
+// });
 
 
 });
