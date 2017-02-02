@@ -12,7 +12,7 @@
 
       <tbody>
       @foreach ($requirements as $requirement)
-          <tr data-id='{{ $requirement->id }}'>
+          <tr data-id='{{ $requirement->id }}' id='{{ $requirement->id }}' >
             <td>{{ $requirement->id }}</td>
             <td>{{ $requirement->description }}</td>
             <td><a href="{{route('requirement.assignfun',$requirement->id)}}" class="waves-effect waves-light btn"> <i class="material-icons">done</i></a></td>

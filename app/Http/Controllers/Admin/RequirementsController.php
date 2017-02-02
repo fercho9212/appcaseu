@@ -92,9 +92,24 @@ class RequirementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
-        return $id;
+
+      if ($request->ajax()) {
+         $requirement=Requirement::find($id);
+
+         if ($requirement->delete()) {
+           return "ok";
+         }else {
+           return "string";
+         }
+
+
+      }else {
+        echo "error";
+      }
+
+
     }
 
     public function list_requerimient(Request $request){

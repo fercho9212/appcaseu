@@ -85,9 +85,52 @@ $('#modal1').modal();
       $(document).on('click', '#btn_delete', function(){
         var row=$(this).parents('tr');
         var id=row.data('id');
-        //alert(id);
-        $('.send_id').attr('data-id',id);
+
+        $('#btn_confirm').attr('data-id',id);
+        $('#btn_confirm').attr('href','/admin/requirements/'+id+'/destroy');
 });
+
+$('#btn_confirm').click(function(e){
+   e.preventDefault();
+   var url=$(this).attr('href');
+   var id=$(this).attr('data-id');
+   var data=$('#form_delete').serialize();
+   $.ajax({
+     type:'GET',
+     url:url,
+     data:data,
+     success:function(data){
+       $('#modal1').modal('close');
+       if (data=='ok') {
+         console.log('siii');
+         $('#'+id).fadeOut();
+       }else {
+         console.log('No elimina');
+       }
+
+      // console.log(id);
+       console.log(data);
+     },
+     error:function(data){
+       var $toastContent = $('<span>No es posible Eliminar este Requerimiento </br> Es por posible que tenga elementos relacionado</br> o de lo contrarion intente más adelante</span>');
+       Materialize.toast($toastContent, 5000);
+       $('#modal1').modal('close');
+     }
+   });
+  // alert(id);
+  // var url='/admin/requirement/'+id+'/destroy';
+  // $.ajax({
+  //   type:'GET',
+  //   url:url,
+  //   data:id,
+  //   success:function(data){
+  //     console.log(data);
+  //   },
+  //   error:function(data){
+  //     console.log('susss');
+  //   }
+//   });
+  });
 /*
 //change
 $('#modal1').modal();
@@ -105,7 +148,7 @@ $(document).on('click', '#btn_delete', function(e){
 });
 
  */
- $('#btn_confirm').click(function(e){
+/* $('#btn_confirm').click(function(e){
    e.preventDefault();
    var id=$('.send_id').attr('data-id');
    var url='/admin/requirement/'+id+'/destroy';
@@ -122,7 +165,7 @@ $(document).on('click', '#btn_delete', function(e){
    });
    //$(this).attr()
  });
-
+*/
   // $('.btn_delete').click(function(){
 //    var id=$(this).data('id');
 //  $('.bottom-sheet').attr('id','modal'+id);
