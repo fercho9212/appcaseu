@@ -1,6 +1,6 @@
 
 <!-- Modal Structure -->
-<div id="modal1" class="modal send_id" data-id="">
+<div id="delete_requi" class="modal send_id" data-id="">
     <div class="modal-content">
         <h4>Delete requirement</h4>
         <div class="divider"></div>
