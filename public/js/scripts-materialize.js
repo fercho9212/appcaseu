@@ -82,6 +82,8 @@ $(function(){
     });
 
 $('#modal1').modal();
+$('#mod_upd_req').modal();
+
       $(document).on('click', '#btn_delete', function(){
         var row=$(this).parents('tr');
         var id=row.data('id');
@@ -117,6 +119,25 @@ $('#btn_confirm').click(function(e){
        $('#modal1').modal('close');
      }
    });
+   });
+$('tbody').delegate('#btn_upd_req','click',function(){
+  var id=$(this).data('id');
+  var url='/admin/requerimients/'+id+'/edit';
+  $.ajax({
+      type:'GET',
+      url:url,
+      data:{'id':id},
+      success:function(data){
+        console.log(data);
+      },
+      error:function(data){
+        console.log('err'+data);
+      }
+
+  });
+});
+
+
   // alert(id);
   // var url='/admin/requirement/'+id+'/destroy';
   // $.ajax({
@@ -130,7 +151,7 @@ $('#btn_confirm').click(function(e){
   //     console.log('susss');
   //   }
 //   });
-  });
+
 /*
 //change
 $('#modal1').modal();

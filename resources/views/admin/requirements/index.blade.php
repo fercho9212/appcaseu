@@ -8,7 +8,10 @@
 
 
 @section('content')
+  <!--Modals-->
   @include('admin.requirements.modal_delete')
+  @include('admin.requirements.modal_update')
+  <!--end Modals-->
   <h3 class="center">Main</h3>
     @include('admin.requirements.form')
     @include('admin.template.components.preloader')

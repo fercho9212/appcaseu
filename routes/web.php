@@ -30,4 +30,5 @@ Route::group(['prefix'=>'admin'],function(){
    'uses'=>'Admin\RequirementsController@destroy',
    'as'=>'requirements.destroy'
 ]);
+ Route::get('requerimients/getUpdate','Admin\RequirementsController@getUpdate');
 });

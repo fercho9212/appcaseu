@@ -68,10 +68,30 @@ class RequirementsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        dd($id);
+        if ($request->ajax()) {
+           $requerimient=Requirement::find($request->id);
+           return $requerimient;
+           //return response()->json($requerimient);
+        }else {
+          return "dasda";
+        }
+        echo "string".$request->id;
     }
+
+   public function getUpdate(Request $request)
+   {
+       if ($request->ajax()) {
+          $requerimient=Requirement::find($request->id);
+          return $requerimient;
+          //return response()->json($requerimient);
+       }else {
+         return  "dasda";
+       }
+       return  "string".$request->id;
+   }
+
 
 
     /**
