@@ -122,19 +122,53 @@ $('#btn_confirm').click(function(e){
    });
 $('tbody').delegate('#btn_upd_req','click',function(){
   var id=$(this).data('id');
-  var url='/admin/requerimients/'+id+'/edit';
+  var url='/admin/requirements/'+id+'/edit';
   $.ajax({
-      type:'GET',
-      url:url,
-      data:{'id':id},
-      success:function(data){
-        console.log(data);
-      },
-      error:function(data){
-        console.log('err'+data);
-      }
-
+    type:'GET',
+    url:url,
+    data:{'id':id},
+    success:function(data){
+        $('#description').val(data.description);
+        $('#id_').val(data.id);
+         },
+         error:function(data){
+           console.log('err'+data);
+         }
   });
+  $('#btn_cofr_update').click(function(e){
+    e.preventDefault();
+    var form =$('#form_upd_requi');
+    var action=form.attr('action');
+    var id=$('#id_').val();
+
+     var data=$('#form_upd_requi').serialize();
+     var url=$(this).attr('href');
+
+     $.ajax({
+       type:'PUT',
+       url:'/admin/requirements/'+id,
+       data:data,
+       success:function(data){
+         console.log(data);
+       },
+       error:function(data){
+         console.log('mal');
+       }
+     });
+     //alert(url);
+  });
+//  var url='/admin/requerimients/'+id+'/edit';
+//  $.ajax({
+//      type:'GET',
+//      url:url,
+//      success:function(data){
+//        console.log(data);
+//      },
+//      error:function(data){
+//        console.log('err'+data);
+//      }
+
+//  });
 });
 
 

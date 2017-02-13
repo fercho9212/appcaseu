@@ -70,14 +70,13 @@ class RequirementsController extends Controller
      */
     public function edit(Request $request)
     {
-        if ($request->ajax()) {
-           $requerimient=Requirement::find($request->id);
-           return $requerimient;
-           //return response()->json($requerimient);
-        }else {
-          return "dasda";
-        }
-        echo "string".$request->id;
+      if ($request->ajax()) {
+        $requerimient=Requirement::find($request->id);
+        return response()->json($requerimient);
+      }else {
+        dd("Acceso no autorizado");
+      }
+
     }
 
    public function getUpdate(Request $request)
@@ -103,7 +102,12 @@ class RequirementsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+       if ($request->ajax()){
+         $requerimient=Requirement::find($id);
+         $requerimient->fill($request->all());
+         $requerimient->save();
+         return response()->json(["mensaje"=>'Listo']);
+       }
     }
 
     /**
