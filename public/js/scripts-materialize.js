@@ -120,6 +120,10 @@ $('#btn_confirm').click(function(e){
      }
    });
    });
+
+function carga(){
+
+}
 $('tbody').delegate('#btn_upd_req','click',function(){
   var id=$(this).data('id');
   var url='/admin/requirements/'+id+'/edit';
@@ -135,6 +139,7 @@ $('tbody').delegate('#btn_upd_req','click',function(){
            console.log('err'+data);
          }
   });
+  });
   $('#btn_cofr_update').click(function(e){
     e.preventDefault();
     var form =$('#form_upd_requi');
@@ -149,7 +154,10 @@ $('tbody').delegate('#btn_upd_req','click',function(){
        url:'/admin/requirements/'+id,
        data:data,
        success:function(data){
-         console.log(data);
+         console.log('jejeje');
+
+       $("#tbl_requerimient").load(location.href+" #tbl_requerimient>*","");
+
        },
        error:function(data){
          console.log('mal');
@@ -157,6 +165,27 @@ $('tbody').delegate('#btn_upd_req','click',function(){
      });
      //alert(url);
   });
+
+  var tab_requi=$('#tbl_requerimient').dataTable();
+  function load(){
+    var url='/admin/requirements/load'
+    $.ajax({
+      type:'GET',
+      url:url,
+      success:function(data){
+        console.log('dsd'+data);
+    //    $.each(data,function(i,item){
+    //      tab_requi.fnAddData([
+    //        item.description,
+    //        item.id,
+    //      ]);
+    //    })
+      },error:function(data){
+        console.log('Error');
+      }
+    });
+  }
+
 //  var url='/admin/requerimients/'+id+'/edit';
 //  $.ajax({
 //      type:'GET',
@@ -169,7 +198,7 @@ $('tbody').delegate('#btn_upd_req','click',function(){
 //      }
 
 //  });
-});
+
 
 
   // alert(id);

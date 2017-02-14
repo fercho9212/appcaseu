@@ -19,6 +19,9 @@ class RequirementsController extends Controller
         $requirements=Requirement::all();
         return view('admin.requirements.index')->with('requirements',$requirements);
     }
+    public function load(){
+      return 'this is a test';
+    }
 
     /**
      * Show the form for creating a new resource.

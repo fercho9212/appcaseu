@@ -19,6 +19,7 @@ Route::group(['prefix'=>'admin'],function(){
   Route::get('requirements/list','Admin\RequirementsController@list');
   Route::resource('requirements', 'Admin\RequirementsController');
   Route::get('requirement','Admin\RequirementsController@list_requerimient');
+  Route::get('requirements/load','Admin\RequirementsController@load');
   Route::get('requirement/{id}/assignfun',[
     'uses'=>'Admin\FunctionalitiesController@assi_funcionality',
     'as'=>'requirement.assignfun'
