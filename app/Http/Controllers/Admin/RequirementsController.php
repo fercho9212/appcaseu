@@ -109,7 +109,7 @@ class RequirementsController extends Controller
          $requerimient=Requirement::find($id);
          $requerimient->fill($request->all());
          $requerimient->save();
-         return response()->json(["mensaje"=>'Listo']);
+         return response()->json($requerimient);
        }
     }
 

@@ -96,6 +96,7 @@ $('#btn_confirm').click(function(e){
    e.preventDefault();
    var url=$(this).attr('href');
    var id=$(this).attr('data-id');
+   alert(id);
    var data=$('#form_delete').serialize();
    $.ajax({
      type:'GET',
@@ -120,13 +121,15 @@ $('#btn_confirm').click(function(e){
      }
    });
    });
+   $('#tbl_requerimient tbody').on('click', 'td', function () {
+     var tr = $(this).closest('tr');
+     rowIndex = tr.index();
+ });
 
-function carga(){
-
-}
 $('tbody').delegate('#btn_upd_req','click',function(){
   var id=$(this).data('id');
   var url='/admin/requirements/'+id+'/edit';
+  alert(id);
   $.ajax({
     type:'GET',
     url:url,
@@ -140,23 +143,28 @@ $('tbody').delegate('#btn_upd_req','click',function(){
          }
   });
   });
+
+  var tab_requi=$('#tbl_requerimient').dataTable();
   $('#btn_cofr_update').click(function(e){
     e.preventDefault();
     var form =$('#form_upd_requi');
     var action=form.attr('action');
     var id=$('#id_').val();
-
+alert(rowIndex);
      var data=$('#form_upd_requi').serialize();
      var url=$(this).attr('href');
-
+$('#tbl_requerimient tr#3692')[0]
      $.ajax({
        type:'PUT',
        url:'/admin/requirements/'+id,
        data:data,
        success:function(data){
-         console.log('jejeje');
+console.log($('[data-id='+data.id+']'));
 
-       $("#tbl_requerimient").load(location.href+" #tbl_requerimient>*","");
+        tab_requi.fnUpdate( [data.id],$('[data-id='+data.id+']'),0);
+      tab_requi.fnUpdate( [data.description],$('[data-id='+data.id+']'),1);
+
+       //$("#tbl_requerimient").load(location.href+" #tbl_requerimient>*","");
 
        },
        error:function(data){
@@ -166,7 +174,7 @@ $('tbody').delegate('#btn_upd_req','click',function(){
      //alert(url);
   });
 
-  var tab_requi=$('#tbl_requerimient').dataTable();
+
   function load(){
     var url='/admin/requirements/load'
     $.ajax({
