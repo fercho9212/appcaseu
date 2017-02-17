@@ -1,4 +1,5 @@
 $(function(){
+  //characteristics of the system
   $(".button-collapse").sideNav();
   $(".dropdown-button").dropdown();
   var i = $("#flow-toggle");
@@ -41,13 +42,20 @@ $(function(){
 
         $('#dinamic_funcionality').append(Html);
     });
-
+/**
+ * function of delete functionalities of sistem
+ * @type {[type]}
+ */
     $(document).on('click', '.dinamic_del_funcionality', function(){
           var button_id = $(this).attr("id");
           $('#row'+button_id+'').remove();
     });
     var table=$('#tbl_func').dataTable();
-
+/**
+ * function of add rows in functionalities
+ * @type {[type]}
+ */
+$('#modal1').modal();
     $('#frm_func').submit(function(event){
       event.preventDefault();
       //var table1=$('#tbl_func').dataTable();
@@ -69,8 +77,8 @@ $(function(){
                 form[0].reset();
                 $.each(msj,function(i,item){
                   table.fnAddData([
-                    item.description,
-                    item.id,
+                    item.description.setAttribute('id',5),
+                    "<button class='btn waves-light red'  data-target='mod_del_funct' id='btn_del_funct'><i class='material-icons'>delete_forever</i></button>"
                   ]);
                   //html+='<tr><td>'+item.description+'</td><td>'+item.id+'</td></tr>';
                   //$('#tbl_func').append('<tr><td>'+item.description+'</td><td>'+item.id+'</td></tr>')
@@ -81,9 +89,16 @@ $(function(){
 
     });
 
-$('#modal1').modal();
-$('#mod_upd_req').modal();
+/**
+ * Modals of requerimients
+ */
 
+$('#mod_upd_req').modal();
+  $('#mod_del_funct').modal();
+/**
+ * [function od delete requerimient]
+ * @type {[type]}
+ */
       $(document).on('click', '#btn_delete', function(){
         var row=$(this).parents('tr');
         var id=row.data('id');
@@ -92,6 +107,10 @@ $('#mod_upd_req').modal();
         $('#btn_confirm').attr('href','/admin/requirements/'+id+'/destroy');
 });
 
+/**
+ * [function confirm in delete of modal]
+ * @type {[type]}
+ */
 $('#btn_confirm').click(function(e){
    e.preventDefault();
    var url=$(this).attr('href');
@@ -121,15 +140,18 @@ $('#btn_confirm').click(function(e){
      }
    });
    });
+   /**
+    * function od prueba for index
+    * @type {[type]}
+    */
    $('#tbl_requerimient tbody').on('click', 'td', function () {
      var tr = $(this).closest('tr');
      rowIndex = tr.index();
  });
-
+//function click update requerimient
 $('tbody').delegate('#btn_upd_req','click',function(){
   var id=$(this).data('id');
   var url='/admin/requirements/'+id+'/edit';
-  alert(id);
   $.ajax({
     type:'GET',
     url:url,
@@ -143,56 +165,38 @@ $('tbody').delegate('#btn_upd_req','click',function(){
          }
   });
   });
-
+//function of confirm update
   var tab_requi=$('#tbl_requerimient').dataTable();
   $('#btn_cofr_update').click(function(e){
     e.preventDefault();
     var form =$('#form_upd_requi');
     var action=form.attr('action');
     var id=$('#id_').val();
-alert(rowIndex);
      var data=$('#form_upd_requi').serialize();
      var url=$(this).attr('href');
-$('#tbl_requerimient tr#3692')[0]
      $.ajax({
        type:'PUT',
        url:'/admin/requirements/'+id,
        data:data,
        success:function(data){
-console.log($('[data-id='+data.id+']'));
-
-        tab_requi.fnUpdate( [data.id],$('[data-id='+data.id+']'),0);
-      tab_requi.fnUpdate( [data.description],$('[data-id='+data.id+']'),1);
-
-       //$("#tbl_requerimient").load(location.href+" #tbl_requerimient>*","");
-
+          tab_requi.fnUpdate( [data.id],$('[data-id='+data.id+']'),0, false, false);
+          tab_requi.fnUpdate( [data.description],$('[data-id='+data.id+']'),1, false, false);
        },
        error:function(data){
          console.log('mal');
        }
      });
-     //alert(url);
   });
 
+  /**
+   * JSCRIPT OF REQUI_FUNC
+   */
 
-  function load(){
-    var url='/admin/requirements/load'
-    $.ajax({
-      type:'GET',
-      url:url,
-      success:function(data){
-        console.log('dsd'+data);
-    //    $.each(data,function(i,item){
-    //      tab_requi.fnAddData([
-    //        item.description,
-    //        item.id,
-    //      ]);
-    //    })
-      },error:function(data){
-        console.log('Error');
-      }
-    });
-  }
+  $(document).on('click', '#btn_del_funct', function(){
+    var row=$(this).parents('tr');
+    var id=row.data('id');
+    alert(id);
+  });
 
 //  var url='/admin/requerimients/'+id+'/edit';
 //  $.ajax({

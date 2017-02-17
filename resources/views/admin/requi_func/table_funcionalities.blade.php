@@ -7,18 +7,14 @@
   </thead>
 
 <tbody id='rest_func'>
-
     @foreach ($funcionalities as $key)
-      <tr>
-      <td>{{$key->description}}</td>
-      <td>{{$key->id}}</td>
+      <tr data-id='{{$key->id}}'>
+        <td>{{$key->description}}</td>
+        <td>
+          <button class="btn waves-light red"  data-target="mod_del_funct" id="btn_del_funct"><i class="material-icons">delete_forever</i></button>
+          <button class="btn waves-light black"   data-target="mod_upd_req" id="btn_upd_req"><i class="material-icons">mode_edit</i></button>
+        </td>
       </tr>
     @endforeach
-
-
-</tbody>
-
-
-
-
+ </tbody>
 </table>
