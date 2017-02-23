@@ -55,6 +55,8 @@ $(function(){
  * function of add rows in functionalities
  * @type {[type]}
  */
+
+
 $('#modal1').modal();
     $('#frm_func').submit(function(event){
       event.preventDefault();
@@ -77,8 +79,8 @@ $('#modal1').modal();
                 form[0].reset();
                 $.each(msj,function(i,item){
                   table.fnAddData([
-                    item.description.setAttribute('id',5),
-                    "<button class='btn waves-light red'  data-target='mod_del_funct' id='btn_del_funct'><i class='material-icons'>delete_forever</i></button>"
+                    item.description,
+                    "<button data-id="+item.id+" class='del btn waves-light red'  data-target='mod_del_funct' id='btn_del_funct'><i class='material-icons'>delete_forever</i></button>"
                   ]);
                   //html+='<tr><td>'+item.description+'</td><td>'+item.id+'</td></tr>';
                   //$('#tbl_func').append('<tr><td>'+item.description+'</td><td>'+item.id+'</td></tr>')
@@ -89,12 +91,40 @@ $('#modal1').modal();
 
     });
 
+
+    $(document).on('click', '#btn_del_funct', function(){
+      var id=$(this).data('id');
+      alert(id+'Pruebaaa');
+      $('#btn_confirm_funct').attr('data-id',id);
+      $('#btn_confirm_funct').attr('href','/admin/functionalities/'+id+'/destroy/');
+    });
+
+    $('#btn_confirm_funct').click(function(e){
+      e.preventDefault();
+     var   id=$(this).attr('data-id');
+     var  url=$(this).attr('href');
+     var data=$('#form_delete').serialize();
+      $.ajax({
+          type:'GET',
+          data:data,
+          url:url,
+          success:function(data){
+            if (data=='ok') {
+              $('#mod_del_funct').modal('close');
+              $('#'+id).fadeOut();
+            }
+          },error:function(data){
+            console.log(data)
+          }
+      });
+
+    });
 /**
  * Modals of requerimients
  */
 
 $('#mod_upd_req').modal();
-  $('#mod_del_funct').modal();
+$('#mod_del_funct').modal();
 /**
  * [function od delete requerimient]
  * @type {[type]}
@@ -107,6 +137,14 @@ $('#mod_upd_req').modal();
         $('#btn_confirm').attr('href','/admin/requirements/'+id+'/destroy');
 });
 
+$(document).on('click', '#btn_delete_funct', function(){
+  var row=$(this).parents('tr');
+  var id=row.data('id');
+
+  $('#btn_confirm').attr('data-id',id);
+  $('#btn_confirm').attr('href','/admin/requirements/'+id+'/destroy');
+});
+
 /**
  * [function confirm in delete of modal]
  * @type {[type]}
@@ -115,8 +153,8 @@ $('#btn_confirm').click(function(e){
    e.preventDefault();
    var url=$(this).attr('href');
    var id=$(this).attr('data-id');
-   alert(id);
    var data=$('#form_delete').serialize();
+   alert(data);
    $.ajax({
      type:'GET',
      url:url,
@@ -125,15 +163,18 @@ $('#btn_confirm').click(function(e){
        $('#modal1').modal('close');
        if (data=='ok') {
          console.log('siii');
+
          $('#'+id).fadeOut();
        }else {
          console.log('No elimina');
+
        }
 
       // console.log(id);
        console.log(data);
      },
      error:function(data){
+
        var $toastContent = $('<span>No es posible Eliminar este Requerimiento </br> Es por posible que tenga elementos relacionado</br> o de lo contrarion intente más adelante</span>');
        Materialize.toast($toastContent, 5000);
        $('#modal1').modal('close');
@@ -192,11 +233,7 @@ $('tbody').delegate('#btn_upd_req','click',function(){
    * JSCRIPT OF REQUI_FUNC
    */
 
-  $(document).on('click', '#btn_del_funct', function(){
-    var row=$(this).parents('tr');
-    var id=row.data('id');
-    alert(id);
-  });
+
 
 //  var url='/admin/requerimients/'+id+'/edit';
 //  $.ajax({

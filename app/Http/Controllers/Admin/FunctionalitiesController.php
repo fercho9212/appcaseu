@@ -128,9 +128,24 @@ class FunctionalitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,Request $request)
     {
-        //
+      if ($request->ajax()) {
+         $functionalities=Funcionality::find($id);
+
+         if ($functionalities->delete()) {
+           return "ok";
+         }else {
+           return "string";
+         }
+
+
+      }else {
+        echo "error";
+      }
+
+
+        return 'holaaa'.$id;
     }
 
 }
