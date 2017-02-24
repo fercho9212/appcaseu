@@ -87,14 +87,14 @@ Route::get('run',function(){
 });
 Route::get('prueba',function(){
   $user = User::where('name', '=', 'ferney')->first();
-
-
+  if ($user->hasRole('Test') ) {
+    echo "Tiene el rol test";
+  }
   if ($user->can('Toaw')) {
-
+    echo 'siii';
   }
   if ($user->hasRole(['ppp','ssss'])) {
-    $usesr=Auth::user();
-    echo $usesr.'rfer';
+    echo 'siii tiene dos roles ';
   }
 });
 
@@ -119,4 +119,10 @@ Route::get('functionalities/{id}/destroy',[
   'as'=>'functionalities.destroy'
 ]);
  Route::get('requerimients/getUpdate','Admin\RequirementsController@getUpdate');
+
+ /**
+  * Modul users
+  */
+Route::resource('users','Admin\users\UsersController');
+
 });
