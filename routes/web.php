@@ -1,6 +1,7 @@
 <?php
 use \App\Models\Role;
 use \App\Models\User;
+use \App\Models\Permission;
 use App\Models\Funcionality;
 /*
 |--------------------------------------------------------------------------
@@ -16,11 +17,15 @@ use App\Models\Funcionality;
 Route::get('/', function () {
     return view('admin.dashboard.index');
 });
+/**
+ * Route of test
+ * @var User
+ */
 Route::get('user',function(){
   $user=new User();
-  $user->name='ferney';
-  $user->email='email';
-  $user->password='dasdasd';
+  $user->name='fabian ';
+  $user->email='el';
+  $user->password='asd';
   $user->save();
 });
 Route::get('prueba',function(){
@@ -36,6 +41,61 @@ Route::get('prueba',function(){
   $admin->description  = 'User is allowed to manage and edit other users'; // optional
   $admin->save();
 
+});
+Route::get('asig',function(){
+  $admin = new Role();
+  $admin->name         = 'ssss';
+  $admin->display_name = 'sss'; // optional
+  $admin->description  = 'sss'; // optional
+  $admin->save();
+
+  $user = User::where('name', '=', 'ferney')->first();
+  $user->roles()->attach($admin->id);
+
+});
+Route::get('permi',function(){
+  $admin = new Role();
+  $admin->name         = 'juanja';
+  $admin->display_name = 'juanja'; // optional
+  $admin->description  = 'juanja'; // optional
+  $admin->save();
+
+  $permi=new Permission();
+  $permi->name='other';
+  $permi->display_name='other';
+  $permi->description='other';
+  $permi->save();
+
+  $permi2=new Permission();
+  $permi2->name='persion';
+  $permi2->display_name='persion';
+  $permi2->description='persion';
+  $permi2->save();
+
+
+  $admin->perms()->sync(array($permi->id, $permi2->id));
+
+});
+Route::get('run',function(){
+  $role= Role::where('name', '=', 'Test')->first();
+  $permi=Permission::where('name','=','je')->first();
+  $permi2=Permission::where('name','=','Tow')->first();
+  $permi3=Permission::where('name','=','persion')->first();
+   $role->perms()->sync(array($permi->id,$permi2->id,$permi3->id));
+
+
+});
+Route::get('prueba',function(){
+  $user = User::where('name', '=', 'ferney')->first();
+
+
+  if ($user->can('Toaw')) {
+
+  }
+  if ($user->hasRole(['ppp','ssss'])) {
+    $usesr=Auth::user();
+    echo $usesr.'rfer';
+  }
 });
 
 Route::group(['prefix'=>'admin'],function(){
