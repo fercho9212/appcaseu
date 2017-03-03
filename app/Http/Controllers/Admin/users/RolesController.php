@@ -4,11 +4,11 @@ namespace App\Http\Controllers\admin\users;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+
 use App\Models\User;
 use App\Models\Role;
 
-class UsersController extends Controller
+class RolesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +17,8 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users=User::all();
-        foreach ($users as $user) {
-          $user['rol']=$user->roles()->first();
-        }
-        return view('admin.users.index')->with('users',$users);
+      $roles=Role::all();
+      return view('admin.roles.index')->with('roles',$roles);
     }
 
     /**
@@ -31,9 +28,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
-      $roles=Role::all();
-      return view('admin.users.create_user')->with('roles',$roles);
+       return view('admin.roles.create_role');
     }
 
     /**
@@ -44,14 +39,9 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $user= new User;
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->password=Hash::make($request->password);
-        $user->save();
-        $user->attachRole(Role::find($request->rol));
-        echo "Bien";
-
+       $role=new Role($request->all());
+       $role->save();
+       echo "Biennnnnn";
     }
 
     /**

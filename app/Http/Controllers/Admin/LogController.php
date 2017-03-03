@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin\users;
-
+namespace App\Http\Controllers\Admin;
+use Auth;
+use Session;
 use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
-use App\Models\Role;
 
-class UsersController extends Controller
+class LogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +16,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users=User::all();
-        foreach ($users as $user) {
-          $user['rol']=$user->roles()->first();
-        }
-        return view('admin.users.index')->with('users',$users);
+          return view('admin.login.index');
     }
 
     /**
@@ -32,8 +27,6 @@ class UsersController extends Controller
     public function create()
     {
         //
-      $roles=Role::all();
-      return view('admin.users.create_user')->with('roles',$roles);
     }
 
     /**
@@ -42,15 +35,13 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
-        $user= new User;
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->password=Hash::make($request->password);
-        $user->save();
-        $user->attachRole(Role::find($request->rol));
-        echo "Bien";
+      if (Auth::attempt(['email'=>$request['mail'],'password'=>$request['password']])) {
+         return 'Biennnn';
+      }else {
+        return 'No esta logeado';
+      }
 
     }
 

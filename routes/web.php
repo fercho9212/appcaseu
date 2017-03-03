@@ -28,15 +28,15 @@ Route::get('user',function(){
   $user->password='asd';
   $user->save();
 });
-Route::get('prueba',function(){
+Route::get('p',function(){
   $owner = new Role();
-  $owner->name         = 'o';
+  $owner->name         = 'Project Owner';
   $owner->display_name = 'Project Owner'; // optional
   $owner->description  = 'User is the owner of a given project'; // optional
   $owner->save();
 
   $admin = new Role();
-  $admin->name         = 'Pend';
+  $admin->name         = 'developer';
   $admin->display_name = 'User Administrator'; // optional
   $admin->description  = 'User is allowed to manage and edit other users'; // optional
   $admin->save();
@@ -55,7 +55,7 @@ Route::get('asig',function(){
 });
 Route::get('permi',function(){
   $admin = new Role();
-  $admin->name         = 'juanja';
+  $admin->name         = 'juana';
   $admin->display_name = 'juanja'; // optional
   $admin->description  = 'juanja'; // optional
   $admin->save();
@@ -97,6 +97,10 @@ Route::get('prueba',function(){
     echo 'siii tiene dos roles ';
   }
 });
+Route::get('login',function(){
+  return view('admin.login.index');
+});
+Route::resource('log','Admin\LogController');
 
 Route::group(['prefix'=>'admin'],function(){
   Route::get('requirements/list','Admin\RequirementsController@list');
@@ -124,5 +128,11 @@ Route::get('functionalities/{id}/destroy',[
   * Modul users
   */
 Route::resource('users','Admin\users\UsersController');
+Route::resource('roles','Admin\users\RolesController');
+Route::resource('permissions','Admin\users\PermissionController');
+Route::get('permissions/{id}/role_permission',[
+  'uses'=>'Admin\users\PermissionController@role_permission',
+  'as'=>'permissions.role'
+]);
 
 });

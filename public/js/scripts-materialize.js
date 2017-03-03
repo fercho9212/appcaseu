@@ -2,6 +2,7 @@ $(function(){
   //characteristics of the system
   $(".button-collapse").sideNav();
   $(".dropdown-button").dropdown();
+  $('select').material_select();
   var i = $("#flow-toggle");
    i.click(function() {
        $("#flow-text-demo").children("p").each(function() {
