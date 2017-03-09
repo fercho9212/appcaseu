@@ -1,8 +1,62 @@
 $(function(){
   //characteristics of the system
+  //
+$('#my-select').multiSelect({
+  selectableHeader: "<div class='custom-header'>Permisos no asignados</div>",
+                  selectionHeader: "<div class='custom-header'>Permisos asignados</div>",
+                 afterSelect:function(value){//enviamos al servidor el id del permiso seleccionado
+                      $.ajax({
+                      url : '{{ URL::to("/permisos/asignar") }}',
+                      type : 'GET',
+                      dataType: 'json',
+                      data : {permission_id: value[0], role_id: rol_id}
+                  }).done(function(data){
+                      console.log(data);
+                  });
+                 },
+});
+$('#table_permi').dataTable();
+
+    $('.get-permisos').click(function(e){
+      e.preventDefault();
+       $('#mod_asig_requi').modal();
+      rol_id = $(this).attr('rol_id');
+
+
+      var modal = $(this)
+      console.log("ROL:ID"+rol_id);
+      var url='/admin/permissions/'+rol_id+'/role_permission'
+      var tab1=$('#table_permi').dataTable();
+      $('#my-select').multiSelect({
+        selectableHeader: "<div class='custom-header'>Permisos no asignados</div>",
+                  selectionHeader: "<div class='custom-header'>Permisos asignados</div>",
+      })
+      $.ajax({
+           url:url,
+           type:'GET',
+           dataType:'json',
+           success:function(data){
+
+
+             $.each(data.permissionsAssigned ,function(index, value){
+                  $('#my-select option[value="'+value.id+'"]').attr('selected', true);
+                 //$('.modal-content').find('input[value="'+value.id+'"]').attr('checked','checked');
+                 console.log("PERMISSION:ID"+value.id);
+                 });
+                 $('#my-select').multiSelect('refresh');
+           },
+           error:function(data){
+             console.log('Error');
+              }
+      })
+    });
+
+
+
+
   $(".button-collapse").sideNav();
   $(".dropdown-button").dropdown();
-  $('select').material_select();
+
   var i = $("#flow-toggle");
    i.click(function() {
        $("#flow-text-demo").children("p").each(function() {
@@ -59,6 +113,7 @@ $(function(){
 
 
 $('#modal1').modal();
+$('#btn_upd_req').modal();
     $('#frm_func').submit(function(event){
       event.preventDefault();
       //var table1=$('#tbl_func').dataTable();

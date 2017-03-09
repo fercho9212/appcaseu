@@ -25,9 +25,9 @@ class PermissionController extends Controller
         echo "heloo".$id;
     }
     public function role_permission($id){
-       $permision=$this->getPermission($id);
-       return view('admin.permission_role.index')->with(['assigned'=>$permision,'permissions'=>$this->permissions,'rol_id'=>$id]);
-    }
+
+        return response()->json($this->getPermission($id));
+           }
     private function getPermission($id){
       $permissions=array();
       $permissions['permissionsAssigned']=$this->getPermissionsAssigned($id);
@@ -64,7 +64,12 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        $rol=Role::find($request->rol_id);
+  $my_checkbox_value = $request['permision'];
+  echo "no";
+  if ($my_checkbox_value==='yes') {
+    echo "string";
+  }
+        /*$rol=Role::find($request->rol_id);
         $permition=$this->getPermission($request->rol_id);
        foreach ($request->permision  as $v) {
         $rpt=true;
@@ -83,7 +88,7 @@ class PermissionController extends Controller
           }
         }else {
           $rol->attachPermission($v);
-        }
+        }*/
     }
 
 /*
@@ -114,7 +119,7 @@ class PermissionController extends Controller
 
 */
 
-    }
+
 
     /**
      * Display the specified resource.

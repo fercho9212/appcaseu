@@ -38,7 +38,7 @@ class LogController extends Controller
     public function store(LoginRequest $request)
     {
       if (Auth::attempt(['email'=>$request['mail'],'password'=>$request['password']])) {
-         return 'Biennnn';
+             return redirect()->route('users.index');
       }else {
         return 'No esta logeado';
       }

@@ -1,3 +1,4 @@
+<!--
 {{ Form::open(array('method'=> 'post', 'route' => array('permissions.store'))) }}
 
 @foreach ($permissions as $permision)
@@ -11,7 +12,7 @@
    @endforeach
    @if ($var==false)
      <p>
-         
+
          {!! Form::checkbox('permision[]',$permision->id, true,['id'=>'test'.$permision->id]) !!}
       <label  for="test{{ $permision->id}}" >{{ $permision->name  }}</label>
     </p>
@@ -27,3 +28,4 @@
 <input type="hidden" name="rol_id" value="{{$rol_id}}">
 {{ Form::submit('Crear', array('class'=> 'waves-light btn')) }}
 {{ Form::close() }}
+-->

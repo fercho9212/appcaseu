@@ -7,7 +7,9 @@
 
 
 
+
 @section('content')
+  @include('admin.roles.modal_assigned_permi')
   <br> <br><br>
   <h1>Roles</h1>
   {{ Form::open(array('method'
@@ -18,4 +20,8 @@
 
 
   @include('admin.roles.table_roles')
+  @section('scripts')
+  {{Html::script('//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js')}}
+  {{Html::script('js/jquery.multi-select.js')}}
+  @endsection
 @endsection

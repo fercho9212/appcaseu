@@ -55,9 +55,9 @@ Route::get('asig',function(){
 });
 Route::get('permi',function(){
   $admin = new Role();
-  $admin->name         = 'juana';
-  $admin->display_name = 'juanja'; // optional
-  $admin->description  = 'juanja'; // optional
+  $admin->name         = 'SuperRol';
+  $admin->display_name = 'j'; // optional
+  $admin->description  = 'j'; // optional
   $admin->save();
 
   $permi=new Permission();

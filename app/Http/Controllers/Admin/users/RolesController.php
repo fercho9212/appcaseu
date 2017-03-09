@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin\users;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Models\Permission;
 use App\Models\User;
 use App\Models\Role;
 
@@ -18,7 +18,8 @@ class RolesController extends Controller
     public function index()
     {
       $roles=Role::all();
-      return view('admin.roles.index')->with('roles',$roles);
+      $permissions=Permission::all();
+      return view('admin.roles.index')->with(['roles'=>$roles,'permissions'=>$permissions]);
     }
 
     /**

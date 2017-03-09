@@ -6,6 +6,14 @@
   @endsection
 
 
+  @role('admin')
+      <p>This is visible to users with the admin role. Gets translated to
+      \Entrust::role('admin')</p>
+  @endrole
+
+    @if(Entrust::can('other'))
+      <h2>holaaaaaaaaaaaa si tiene permiso</h2>
+    @endif
 
 @section('content')
   <br> <br><br>

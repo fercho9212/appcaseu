@@ -1,4 +1,4 @@
-<table  class="display bordered">
+<table id="table_permi" class="display bordered">
   <thead>
     <tr>
       <th>No User</th>
@@ -14,6 +14,10 @@
           <td>{{$rol->id}}</td>
           <td>{{$rol->name}}</td>
           <td>{{$rol->display_name}}</td>
+          <td>
+            <a class="btn waves-light black get-permisos"  rol_id='{{ $rol->id }}' data-target="mod_asig_requi" id="mod_asig_requi"><i class="material-icons">mode_edit</i></a>
+
+          </td>
 
           <td>
             {{ Form::open(array('method'
