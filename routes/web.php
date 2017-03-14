@@ -55,21 +55,21 @@ Route::get('asig',function(){
 });
 Route::get('permi',function(){
   $admin = new Role();
-  $admin->name         = 'SuperRol';
-  $admin->display_name = 'j'; // optional
-  $admin->description  = 'j'; // optional
+  $admin->name         = 'test permision';
+  $admin->display_name = 'juuu'; // optional
+  $admin->description  = 'juuu'; // optional
   $admin->save();
 
   $permi=new Permission();
-  $permi->name='other';
-  $permi->display_name='other';
-  $permi->description='other';
+  $permi->name='other_permission';
+  $permi->display_name='other_permission';
+  $permi->description='other_permission';
   $permi->save();
 
   $permi2=new Permission();
-  $permi2->name='persion';
-  $permi2->display_name='persion';
-  $permi2->description='persion';
+  $permi2->name='persion_i';
+  $permi2->display_name='persion_i';
+  $permi2->description='persion_i';
   $permi2->save();
 
 
@@ -129,7 +129,7 @@ Route::get('functionalities/{id}/destroy',[
   */
 Route::resource('users','Admin\users\UsersController');
 Route::resource('roles','Admin\users\RolesController');
-Route::resource('permissions','Admin\users\PermissionController');
+Route::resource('role_permission','Admin\users\RolesPermissionsController');
 Route::get('permissions/{id}/role_permission',[
   'uses'=>'Admin\users\PermissionController@role_permission',
   'as'=>'permissions.role'

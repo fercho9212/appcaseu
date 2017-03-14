@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\admin\users;
-
+use Auth;
+use Session;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\RolesPermission;

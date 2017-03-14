@@ -1,6 +1,10 @@
 $(function(){
+  $('#table_permi').dataTable();
+  $('#mod_asig_requi').modal();
+  $('select').material_select();
   //characteristics of the system
   //
+  /*
 $('#my-select').multiSelect({
   selectableHeader: "<div class='custom-header'>Permisos no asignados</div>",
                   selectionHeader: "<div class='custom-header'>Permisos asignados</div>",
@@ -52,7 +56,7 @@ $('#table_permi').dataTable();
     });
 
 
-
+*/
 
   $(".button-collapse").sideNav();
   $(".dropdown-button").dropdown();

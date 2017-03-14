@@ -8,24 +8,25 @@ use App\Models\Permission;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Contracts\Auth\Guard;
-class RolesController extends Controller
+
+class RolesPermissionsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-     public function __construct(Role $role, Permission $permission, Guard $auth)
+ public function __construct(Role $role, Permission $permission, Guard $auth)
  	{
- 		$this->role = $role;
- 		$this->auth = $auth;
- 		$this->permission = $permission;
+   		$this->role = $role;
+   		$this->auth = $auth;
+   		$this->permission = $permission;
  	}
     public function index()
     {
       $roles=Role::all();
       $permissions=Permission::all();
-      return view('admin.roles.index')->with(['roles'=>$roles,'permissions'=>$permissions]);
+      return view('admin.roles_permissions.index')->with(['roles'=>$roles,'permissions'=>$permissions]);
     }
 
     /**
@@ -35,7 +36,7 @@ class RolesController extends Controller
      */
     public function create()
     {
-       return view('admin.roles.create_role');
+        dd('entraa');
     }
 
     /**
@@ -46,9 +47,14 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-       $role=new Role($request->all());
-       $role->save();
-       echo "Biennnnnn";
+        $input = $request->all();
+        $roles = $this->role->all();
+        foreach ($roles as $role) {
+          $permissions_sync=isset($input['roles'][$role->id]) ? $input['roles'][$role->id]['permissions'] : [];
+          $role->perms()->sync($permissions_sync);
+        }
+        dd("Creado Con :DdDd");
+
     }
 
     /**
