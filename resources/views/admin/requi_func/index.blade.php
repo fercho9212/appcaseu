@@ -2,8 +2,9 @@
 @section('styles')
   {{Html::style('css/styles-materialize.css')}}
   {{Html::style('//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css')}}
-@endsection 
+@endsection
 @section('content')
+    @include('admin.requi_func.modal_update')
     @include('admin.requi_func.modal_delete')
     <div class="row">
       <h4 class="center-align black-text">{{$requirement->description}}</h4>

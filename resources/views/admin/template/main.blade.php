@@ -10,9 +10,11 @@
   </head>
 
   <body>
-   <header class="teal darken-1">
+   <header >
      @include('admin.template.components.nav')
    </header>
+    @include('admin.template.components.sideNav')
+<main>
     <div class="container">
         <div class="col s12 m8 l10">
           @include('admin.template.components.message')          <!--MENSAGGE SEND FOR LARAVEL-->
@@ -22,7 +24,7 @@
         </div>
     </div>
 
-
+<main>
 
 
     {{Html::script('plugins/jquery/js/jquery.js')}}

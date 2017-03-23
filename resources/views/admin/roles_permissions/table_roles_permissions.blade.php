@@ -24,14 +24,14 @@
                     <td width="150" class="text-center">
                         @if ($permission->hasRole($role->name) && $role->name == 'admin')
                             <input id="{{$permission->id}}{{$role->id}}" type="checkbox" checked name="roles[{{ $role->id}}][permissions][]" value="{{ $permission->id }}" disabled>
-                            <label for="{{$permission->id}}{{$role->id}}">es admin</label>
+                            <label for="{{$permission->id}}{{$role->id}}"></label>
                             <input  type="hidden" name="roles[{{$role->id}}][permissions][]" value="{{ $permission->id }}">
                         @elseif($permission->hasRole($role->name))
                             <input  id="{{$permission->id}}{{$role->id}}" type="checkbox" checked name="roles[{{ $role->id}}][permissions][]" value="{{ $permission->id }}">
-                            <label for="{{$permission->id}}{{$role->id}}">Tiene rol</label>
+                            <label for="{{$permission->id}}{{$role->id}}"></label>
                         @else
                             <input  id="{{$permission->id}}{{$role->id}}"  type="checkbox" name="roles[{{ $role->id }}][permissions][]" value="{{ $permission->id }}">
-                            <label  for="{{$permission->id}}{{$role->id}}">No tiene rol</label>
+                            <label  for="{{$permission->id}}{{$role->id}}"></label>
                         @endif
                     </td>
                 @endforeach

@@ -73,6 +73,7 @@ class RequirementsController extends Controller
      */
     public function edit(Request $request)
     {
+
       if ($request->ajax()) {
         $requerimient=Requirement::find($request->id);
         return response()->json($requerimient);
@@ -109,6 +110,7 @@ class RequirementsController extends Controller
          $requerimient=Requirement::find($id);
          $requerimient->fill($request->all());
          $requerimient->save();
+         dd('dsad');
          return response()->json($requerimient);
        }
     }

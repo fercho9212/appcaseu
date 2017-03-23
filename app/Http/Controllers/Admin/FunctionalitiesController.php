@@ -105,9 +105,14 @@ class FunctionalitiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+      if ($request->ajax()) {
+        $requerimient=Funcionality::find($request->id);
+        return response()->json($requerimient);
+      }else {
+        dd("Acceso no autorizado");
+      }
     }
 
     /**

@@ -1,3 +1,32 @@
+header, main, footer {
+  padding-left: 280px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+  .container {
+      width: 90% !important;
+  }
+}
+@media only screen and (min-width: 993px){
+.container {
+    width: 90% !important;
+  }
+}
+
+
+/**  theme **/
+.nav-wrapper {
+    z-index: 999;
+}
+.side-nav {
+z-index: 1 !important;
+}
+#sidenav-overlay{
+  background-color: rgba(0, 0, 0, 0.0);
+}
 #card-alert i {
     font-size:20px;
     position:relative;

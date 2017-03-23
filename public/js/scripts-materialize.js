@@ -58,7 +58,9 @@ $('#table_permi').dataTable();
 
 */
 
-  $(".button-collapse").sideNav();
+  $(".button-collapse").sideNav({
+    menuWidth: 280,
+  });
   $(".dropdown-button").dropdown();
 
   var i = $("#flow-toggle");
@@ -115,7 +117,7 @@ $('#table_permi').dataTable();
  * @type {[type]}
  */
 
-
+$('#mod_upd_req').modal();
 $('#modal1').modal();
 $('#btn_upd_req').modal();
     $('#frm_func').submit(function(event){
@@ -140,8 +142,9 @@ $('#btn_upd_req').modal();
                 $.each(msj,function(i,item){
                   table.fnAddData([
                     item.description,
-                    "<button data-id="+item.id+" class='del btn waves-light red'  data-target='mod_del_funct' id='btn_del_funct'><i class='material-icons'>delete_forever</i></button>"
-                  ]);
+                    "<button data-id="+item.id+" class='del btn waves-light red'  data-target='mod_del_funct' id='btn_del_funct'><i class='material-icons'>delete_forever</i></button>"+
+                    "<button class='btn waves-light black'  data-id='{{ $requirement->id }}' data-target='mod_upd_req' id='btn_upd_req'><i class='material-icons'>mode_edit</i></button>"
+                    ]);
                   //html+='<tr><td>'+item.description+'</td><td>'+item.id+'</td></tr>';
                   //$('#tbl_func').append('<tr><td>'+item.description+'</td><td>'+item.id+'</td></tr>')
                 })
@@ -183,7 +186,7 @@ $('#btn_upd_req').modal();
  * Modals of requerimients
  */
 
-$('#mod_upd_req').modal();
+
 $('#mod_del_funct').modal();
 /**
  * [function od delete requerimient]
@@ -252,12 +255,14 @@ $('#btn_confirm').click(function(e){
 //function click update requerimient
 $('tbody').delegate('#btn_upd_req','click',function(){
   var id=$(this).data('id');
-  var url='/admin/requirements/'+id+'/edit';
+  console.log(id);
+  var url='/admin/functionalities/'+id+'/edit';
   $.ajax({
     type:'GET',
     url:url,
     data:{'id':id},
     success:function(data){
+      console.log(data);
         $('#description').val(data.description);
         $('#id_').val(data.id);
          },

@@ -12,7 +12,7 @@
         <td>{{$key->description}}</td>
         <td>
           <button class="del btn waves-light red"  data-id='{{$key->id}}' data-target="mod_del_funct" id="btn_del_funct"><i class="material-icons">delete_forever</i></button>
-          <button class="btn waves-light black"   data-target="mod_upd_req" id="btn_upd_req"><i class="material-icons">mode_edit</i></button>
+          <button class="btn waves-light black"  data-id='{{$key->id}}'  data-target="mod_upd_req" id="btn_upd_req"><i class="material-icons">mode_edit</i></button>
         </td>
       </tr>
     @endforeach
