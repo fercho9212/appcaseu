@@ -12,8 +12,9 @@
   <body>
    <header >
      @include('admin.template.components.nav')
+     @include('admin.template.components.sideNav')
    </header>
-    @include('admin.template.components.sideNav')
+
 <main>
     <div class="container">
         <div class="col s12 m8 l10">

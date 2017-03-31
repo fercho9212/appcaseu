@@ -59,7 +59,7 @@ $('#table_permi').dataTable();
 */
 
   $(".button-collapse").sideNav({
-    menuWidth: 280,
+    menuWidth: 260,
   });
   $(".dropdown-button").dropdown();
 
@@ -136,10 +136,12 @@ $('#btn_upd_req').modal();
         dataType: 'json',
         url:      url,
         success:  function(msj){
+
         table.fnClearTable();
                 btn_x.remove();
                 form[0].reset();
                 $.each(msj,function(i,item){
+                  $('.tbl_func tr').attr('data-id',item.id);//aca voy
                   table.fnAddData([
                     item.description,
                     "<button data-id="+item.id+" class='del btn waves-light red'  data-target='mod_del_funct' id='btn_del_funct'><i class='material-icons'>delete_forever</i></button>"+
@@ -175,6 +177,7 @@ $('#btn_upd_req').modal();
             if (data=='ok') {
               $('#mod_del_funct').modal('close');
               $('#'+id).fadeOut();
+              console.log(id);
             }
           },error:function(data){
             console.log(data)

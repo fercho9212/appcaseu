@@ -1,7 +1,7 @@
 <!-- Dropdown Structure -->
 <nav class="hoverable ">
   <div class="nav-wrapper teal darken-1">
-    <a href="#" class="brand-logo center">AppcaseUs</a>
+    <a href="#" class="brand-logo center">As</a>
     <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Requirements<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -27,8 +27,8 @@
             <a class="collapsible-header">Users<i class="material-icons">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="">Create</a></li>
-                <li><a href="">listar</a></li>
+                <li><a href="{{route('users.create')}}">Create</a></li>
+                <li><a href="{{route('roles.create')}}">Create Role</a></li>
               </ul>
             </div>
           </li>
@@ -37,10 +37,10 @@
     <li class="no-padding">
         <ul class="collapsible collapsible-accordion">
           <li>
-            <a class="collapsible-header">Categorias<i class="material-icons">arrow_drop_down</i></a>
+            <a class="collapsible-header">Usuarios<i class="material-icons">arrow_drop_down</i></a>
             <div class="collapsible-body">
               <ul>
-                <li><a href="">Create</a></li>
+                <li><a href="{{route('users.create')}}">Create</a></li>
                 <li><a href="">listar</a></li>
               </ul>
             </div>

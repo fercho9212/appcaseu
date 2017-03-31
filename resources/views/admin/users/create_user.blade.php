@@ -1,5 +1,8 @@
 @extends('admin.template.main')
-
+@section('styles')
+  {{Html::style('css/styles-materialize.css')}}
+  {{Html::style('//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css')}}
+@endsection
   @section('content')
   {{ Form::open(array('method'=> 'post', 'route' => array('users.store'))) }}
     <div class="row">
@@ -28,7 +31,7 @@
 
               @endforeach
             </select>
-            <label>Choose rol</label>
+            <label>Choose rol FF</label>
         </div>
       </div>
 
