@@ -40,4 +40,12 @@
 
   {{ Form::submit('Crear', array('class'=> ' waves-light btn')) }}
 {{ Form::close() }}
-  @endsection
+
+  <script type="text/javascript">
+  $(document).ready(function(){
+     alert('lala');
+  })
+
+  </script>
+
+    @endsection

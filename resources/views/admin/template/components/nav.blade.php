@@ -1,5 +1,5 @@
 <!-- Dropdown Structure -->
-<nav class="hoverable ">
+<nav class="hoverable">
   <div class="nav-wrapper teal darken-1">
     <a href="#" class="brand-logo center">As</a>
     <a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
